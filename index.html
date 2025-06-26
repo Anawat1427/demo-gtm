@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Demo de Medición con GTM</title>
+  <style>
+    body {
+      background-color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #007acc;
+      color: white;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    header img {
+      height: 50px;
+    }
+
+    .contenido {
+      padding: 30px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    .producto {
+      display: flex;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      margin-top: 20px;
+    }
+
+    .producto img {
+      width: 300px;
+      object-fit: cover;
+    }
+
+    .detalle {
+      padding: 20px;
+      flex-grow: 1;
+    }
+
+    .detalle h2 {
+      margin-top: 0;
+    }
+
+    .boton {
+      background-color: #007acc;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      margin: 5px 5px 5px 0;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .boton:hover {
+      background-color: #005f99;
+    }
+
+    .carrito {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px dashed #999;
+      border-radius: 5px;
+      background: #f9f9f9;
+      display: none;
+    }
+
+    .cookie-banner {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      background: #333;
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .cookie-banner button {
+      background: #00c851;
+      border: none;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+
+   <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P7W65NPX');</script>
+<!-- End Google Tag Manager -->
+  <!-- <script> ... </script> -->
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P7W65NPX"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+  <!-- <noscript><iframe ...></iframe></noscript> -->
+
+  <header>
+    <img src="https://via.placeholder.com/100x50?text=LOGO" alt="Logo">
+    <h1>Demo de Google Tag Manager</h1>
+  </header>
+
+  <div class="contenido">
+    <p>Interacciones simuladas para testing de eventos de comercio electrónico.</p>
+
+    <div class="producto">
+      <img src="https://www.losdistribuidores.com/wp-content/uploads/2023/10/iphone-15-pro-max-azul-titanio-vista-frontal-y-trasera.webp" alt="Producto">
+      <div class="detalle">
+        <h2>Celular Iphone 15</h2>
+        <p>Precio: $999.00<br>Modelo: Ultra 15 retina</p>
+        <button class="boton" id="add-to-cart">Agregar al Carrito</button>
+        <button class="boton" id="checkout">Checkout</button>
+        <button class="boton" id="purchase">Finalizar Compra</button>
+        <button class="boton" id="ver-carrito">Ver Carrito</button>
+      </div>
+    </div>
+
+    <div class="carrito" id="carrito">
+      <strong>Carrito:</strong>
+      <p>1x Celular Iphone 15<- $999.00</p>
+    </div>
+
+    <button class="boton" id="boton-compra">Hacer Compra Rápida</button>
+    <p><a href="https://www.alkosto.com/iphone-15-128gb-5g-negro/p/195949035913?fuente=google&medio=cpc&campaign=AK_COL_MAX_PEF_CPC_AON_TLP_Apple_Feb20_EXP_FEB&keyword=&gad_source=4&gad_campaignid=17338810261&gbraid=0AAAAADlnVbiVhbixr2GrH6MtVm7ISA0rS&gclid=CjwKCAjwvO7CBhAqEiwA9q2YJbh2spqQX2rwZOgWdVn4gdjIHyfWRNSZY8hIbuZjQgmHZYFpCs1M5BoCF74QAvD_BwE" id="link-externo" target="_blank">Ir a sitio externo</a></p>
+  </div>
+
+  <!-- Banner de Cookies -->
+  <div class="cookie-banner" id="cookie-banner">
+    <span>Usamos cookies para personalizar contenido y analizar tráfico.</span>
+    <button onclick="aceptarCookies()">Aceptar</button>
+  </div>
+
+  <script>
+    const dataLayer = window.dataLayer || [];
+
+    document.getElementById('boton-compra').addEventListener('click', function () {
+      dataLayer.push({
+        event: 'compra_realizada',
+        categoria: 'boton',
+        accion: 'click',
+        etiqueta: 'Hacer Compra Rápida'
+      });
+    });
+
+    document.getElementById('add-to-cart').addEventListener('click', function () {
+      document.getElementById('carrito').style.display = 'block';
+      dataLayer.push({
+        event: 'add_to_cart',
+        ecommerce: {
+          items: [{
+            item_name: 'Zapatillas de RunIphone 15',
+            item_id: 'Iph-001',
+            price: 999.00,
+            quantity: 1
+          }]
+        }
+      });
+    });
+
+    document.getElementById('checkout').addEventListener('click', function () {
+      dataLayer.push({
+        event: 'begin_checkout',
+        ecommerce: {
+          currency: 'USD',
+          value: 999.00
+        }
+      });
+    });
+
+    document.getElementById('purchase').addEventListener('click', function () {
+      dataLayer.push({
+        event: 'purchase',
+        ecommerce: {
+          transaction_id: 'ORDER123',
+          value: 999.00,
+          currency: 'USD',
+          items: [{
+            item_name: 'Zapatillas de Running',
+            item_id: 'ZAP-001',
+            price: 999.00,
+            quantity: 1
+          }]
+        }
+      });
+    });
+
+    document.getElementById('ver-carrito').addEventListener('click', function () {
+      alert('Tienes 1 producto en el carrito.');
+    });
+
+    function aceptarCookies() {
+      document.getElementById('cookie-banner').style.display = 'none';
+      dataLayer.push({ event: 'cookies_aceptadas' });
+    }
+  </script>
+</body>
+</html>
