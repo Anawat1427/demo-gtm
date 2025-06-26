@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Demo de Medición con GTM</title>
+  <style>
+    body {
+      background-color: white;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    header img {
+      height: 50px;
+    }
+
+    .producto {
+      border: 1px solid #ccc;
+      padding: 16px;
+      margin: 20px 0;
+      max-width: 300px;
+      border-radius: 8px;
+    }
+
+    .boton {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .cookie-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #f1f1f1;
+      padding: 15px;
+      text-align: center;
+      border-top: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    .cookie-banner button {
+      margin-left: 10px;
+    }
+  </style>
+
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P7W65NPX');</script>
+<!-- End Google Tag Manager -->
+  <!-- <script> ... </script> -->
+
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P7W65NPX"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+  <!-- <noscript><iframe ...></iframe></noscript> -->
+
+  <header>
+    <img src="https://www.losdistribuidores.com/wp-content/uploads/2023/10/iphone-15-pro-max-azul-titanio-vista-frontal-y-trasera.webp" alt="Anawat>
+    <h1>Bienvenido al demo de Google Tag Manager</h1>
+  </header>
+
+  <!-- Producto -->
+  <div class="producto">
+    <h2>Celular Iphone 15</h2>
+    <p>Apple iPhone 15 Pro Max El Apple iPhone 15 Pro Max regresa con un mismo diseño pero con chasis de titanio que le otorga mayor resistencia y menor peso. El iPhone 15 Pro Max tiene una pantalla OLED de 6.7 pulgadas con tasa de refresco de 120Hz y está impulsado por un procesador Apple A17 Pro de seis núcleos.
+         Precio: $999</p>
+    <button class="boton" id="add-to-cart">Agregar al Carrito</button>
+    <button class="boton" id="checkout">Checkout</button>
+    <button class="boton" id="purchase">Comprar</button>
+  </div>
+
+  <!-- Botón de evento personalizado -->
+  <button class="boton" id="boton-compra">Hacer Compra</button>
+
+  <!-- Enlace externo -->
+  <p><a href="https://www.alkosto.com/iphone-15-128gb-5g-negro/p/195949035913?fuente=google&medio=cpc&campaign=AK_COL_MAX_PEF_CPC_AON_TLP_Apple_Feb20_EXP_FEB&keyword=&gad_source=4&gad_campaignid=17338810261&gbraid=0AAAAADlnVbiVhbixr2GrH6MtVm7ISA0rS&gclid=CjwKCAjwvO7CBhAqEiwA9q2YJbh2spqQX2rwZOgWdVn4gdjIHyfWRNSZY8hIbuZjQgmHZYFpCs1M5BoCF74QAvD_BwE"
+     id="link-externo" target="_blank">Ir a sitio externo</a></p>
+
+  <!-- Cookie banner -->
+  <div class="cookie-banner" id="cookie-banner">
+    Usamos cookies para mejorar tu experiencia. <button onclick="aceptarCookies()">Aceptar</button>
+  </div>
+
+  <!-- Script para eventos y cookies -->
+  <script>
+    const dataLayer = window.dataLayer || [];
+
+    document.getElementById('add-to-cart').addEventListener('click', function () {
+      dataLayer.push({ event: 'add_to_cart', product: 'Producto de Prueba', price: 999 });
+    });
+
+    document.getElementById('checkout').addEventListener('click', function () {
+      dataLayer.push({ event: 'begin_checkout' });
+    });
+
+    document.getElementById('purchase').addEventListener('click', function () {
+      dataLayer.push({ event: 'purchase', transaction_id: '123ABC', value: 999 });
+    });
+
+    function aceptarCookies() {
+      document.getElementById('cookie-banner').style.display = 'none';
+      dataLayer.push({ event: 'cookies_aceptadas' });
+    }
+  </script>
+</body>
+</html>
